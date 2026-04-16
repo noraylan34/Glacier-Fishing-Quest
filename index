@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Official developer transparency page for Glacier Fishing Quest by Next Generation Mobile Applications Studio." />
+  <title>Glacier Fishing Quest — Developer Transparency</title>
+  <style>
+    :root {
+      --bg1:#07121d;
+      --bg2:#0a1a2b;
+      --bg3:#0d2337;
+      --card:rgba(16,33,49,.76);
+      --card-strong:rgba(20,42,63,.86);
+      --line:rgba(173,223,255,.16);
+      --line-strong:rgba(173,223,255,.28);
+      --text:#eef7ff;
+      --muted:#b7cddd;
+      --accent:#7ddfff;
+      --accent-soft:rgba(125,223,255,.16);
+      --shadow:0 18px 40px rgba(0,0,0,.28);
+      --radius:28px;
+      --pill:24px;
+      --max:920px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(128,225,255,.14), transparent 20%),
+        radial-gradient(circle at 90% 10%, rgba(95,160,255,.10), transparent 20%),
+        linear-gradient(180deg,#07111b 0%,#07182a 28%,#0a2235 100%);
+      min-height:100vh;
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:radial-gradient(rgba(255,255,255,.17) .9px, transparent .9px);
+      background-size:30px 30px;
+      opacity:.22; pointer-events:none;
+    }
+    .wrap{width:min(var(--max),calc(100% - 20px)); margin:0 auto; padding:14px 0 32px}
+    .mobile-shell{
+      border-radius:34px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(8,20,32,.96), rgba(9,24,39,.92));
+      border:1px solid rgba(180,230,255,.10);
+      box-shadow:0 30px 80px rgba(0,0,0,.28);
+      position:relative;
+    }
+    .mobile-shell::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(125,223,255,.05), transparent 24%, transparent 70%, rgba(125,223,255,.04));
+      pointer-events:none;
+    }
+    .top{
+      padding:14px 14px 18px;
+      background:linear-gradient(180deg, rgba(5,14,24,.9) 0%, rgba(8,22,34,.88) 100%);
+      border-bottom:1px solid rgba(173,223,255,.08);
+      position:relative;
+      z-index:1;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; margin-bottom:14px;
+    }
+    .logo{
+      width:56px; height:56px; border-radius:18px; flex:none;
+      display:grid; place-items:center;
+      background:linear-gradient(145deg, rgba(106,200,255,.18), rgba(255,255,255,.05));
+      border:1px solid rgba(173,223,255,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.24);
+      font-size:28px;
+    }
+    .brand h1{margin:0; font-size:clamp(1.5rem,5vw,2rem); line-height:1.02; letter-spacing:-.03em}
+    .brand p{margin:4px 0 0; color:var(--muted); font-size:1.02rem}
+    .nav{
+      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+    }
+    .nav a{
+      text-decoration:none; color:var(--text);
+      min-height:58px; border-radius:999px;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; padding:12px 14px;
+      font-size:clamp(1.05rem,3.8vw,1.35rem);
+      background:linear-gradient(180deg, rgba(65,88,109,.46), rgba(46,69,89,.38));
+      border:1px solid rgba(173,223,255,.15);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 24px rgba(0,0,0,.12);
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .nav a:nth-child(3){grid-column:1 / -1}
+    .nav a.active{
+      background:linear-gradient(180deg, rgba(91,143,173,.40), rgba(59,108,138,.34));
+      border-color:rgba(125,223,255,.34);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px rgba(125,223,255,.06), 0 16px 34px rgba(21,53,77,.26);
+    }
+    .nav a:active{transform:scale(.985)}
+
+    .content{padding:18px 12px 12px; position:relative; z-index:1}
+    .hero,.info-grid article,.footer-card{
+      background:linear-gradient(160deg, rgba(46,73,97,.62), rgba(17,32,48,.76));
+      border:1px solid rgba(173,223,255,.15);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .hero{padding:18px; overflow:hidden; position:relative}
+    .hero::before{
+      content:"";
+      position:absolute; inset:-10% auto auto 40%; width:220px; height:220px; border-radius:50%;
+      background:radial-gradient(circle, rgba(146,220,255,.18), transparent 64%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 18px; border-radius:999px;
+      border:1px solid rgba(173,223,255,.22); color:#dff3ff;
+      background:rgba(92,143,175,.20); font-size:.94rem; letter-spacing:.16em; text-transform:uppercase;
+    }
+    .hero h2{font-size:clamp(2rem,9vw,3.7rem); line-height:.96; letter-spacing:-.05em; margin:18px 0 16px; max-width:640px}
+    .hero p{font-size:clamp(1.1rem,4.4vw,1.38rem); line-height:1.75; color:#d7e9f5; margin:0 0 18px; max-width:680px}
+    .cta-group{display:grid; gap:12px; margin-top:18px}
+    .cta{
+      text-decoration:none; color:var(--text); text-align:center;
+      padding:16px 18px; border-radius:999px; font-size:1rem;
+      border:1px solid rgba(173,223,255,.18);
+      background:linear-gradient(180deg, rgba(94,156,194,.28), rgba(65,101,128,.26));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+    }
+    .cta.secondary{background:linear-gradient(180deg, rgba(44,62,80,.42), rgba(25,40,56,.42))}
+    .info-grid{display:grid; gap:14px; margin-top:14px}
+    .info-grid article{padding:18px}
+    .info-grid h3{margin:0 0 10px; font-size:1.18rem}
+    .info-grid p,.info-grid li{margin:0; color:#d5e7f3; line-height:1.7; font-size:1rem}
+    .info-grid ul{margin:0; padding-left:18px}
+    .kv{display:grid; gap:10px}
+    .kv div{padding:14px 16px; border-radius:22px; background:rgba(255,255,255,.03); border:1px solid rgba(173,223,255,.08)}
+    .label{display:block; color:var(--muted); font-size:.82rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:5px}
+    .footer-card{margin-top:14px; padding:18px}
+    .footer-card p{margin:0; line-height:1.75; color:#d8ebf7}
+    a.inline{color:#aee9ff}
+    @media (min-width:720px){
+      .wrap{padding:24px 0 40px}
+      .top{padding:18px 18px 22px}
+      .content{padding:22px 18px 18px}
+      .hero{padding:22px}
+      .info-grid{grid-template-columns:1fr 1fr}
+      .cta-group{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="mobile-shell">
+      <header class="top">
+        <div class="brand">
+          <div class="logo">❄️</div>
+          <div>
+            <h1>Glacier Fishing Quest</h1>
+            <p>Developer transparency page</p>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+          <a class="active" href="index.html">Home</a>
+          <a href="support.html">Support</a>
+          <a href="marketing.html">Marketing</a>
+        </nav>
+      </header>
+
+      <section class="content">
+        <section class="hero">
+          <div class="eyebrow">Open • Clear • Developer-first</div>
+          <h2>Building trust around Glacier Fishing Quest</h2>
+          <p>
+            This website gives users and Google Play reviewers a clear public view of the app,
+            the developer profile, the current product direction, and the linked policy pages.
+            The goal is simple: transparency, honesty, and a straightforward mobile experience.
+          </p>
+          <div class="cta-group">
+            <a class="cta" href="privacy-policy.html">Read Privacy Policy</a>
+            <a class="cta secondary" href="support.html">Open Support Page</a>
+            <a class="cta secondary" href="marketing.html">See App Vision</a>
+          </div>
+        </section>
+
+        <section class="info-grid">
+          <article>
+            <h3>Developer Information</h3>
+            <div class="kv">
+              <div><span class="label">Developer name</span>Next Generation Mobile Applications Studio</div>
+              <div><span class="label">Public contact</span><a class="inline" href="mailto:noraylan34@gmail.com">noraylan34@gmail.com</a></div>
+              <div><span class="label">App name</span>Glacier Fishing Quest</div>
+            </div>
+          </article>
+
+          <article>
+            <h3>What users can expect</h3>
+            <ul>
+              <li>A simple and readable public information structure.</li>
+              <li>A direct privacy statement with no hidden wording.</li>
+              <li>A support page with a visible developer contact address.</li>
+              <li>A marketing page that clearly explains the current stage of development.</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Public commitment</h3>
+            <p>
+              The app is presented openly. The current version does not include subscriptions or paid features.
+              Future monetization may be introduced later, but the intent is to keep improving the project and bring
+              real value to players over time.
+            </p>
+          </article>
+
+          <article>
+            <h3>Quick links</h3>
+            <div class="kv">
+              <div><span class="label">Privacy URL</span><a class="inline" href="privacy-policy.html">privacy-policy.html</a></div>
+              <div><span class="label">Support URL</span><a class="inline" href="support.html">support.html</a></div>
+              <div><span class="label">Marketing URL</span><a class="inline" href="marketing.html">marketing.html</a></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="footer-card">
+          <p>
+            This page is intended to present a transparent and professional overview of the developer account and the application.
+            All information here is public-facing, direct, and written to be easy to review on mobile devices.
+          </p>
+        </section>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
